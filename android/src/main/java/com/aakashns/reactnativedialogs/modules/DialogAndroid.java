@@ -388,8 +388,12 @@ public class DialogAndroid extends ReactContextBaseJavaModule {
             public void run() {
                 if (mDialog != null)
                     mDialog.dismiss();
-                mDialog = mBuilder.build();
-                mDialog.show();
+                try {
+                    mDialog = mBuilder.build();
+                    mDialog.show();
+                } catch (Exception e) {
+                    // Do nothing
+                }
             }
         });
     }
