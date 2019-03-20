@@ -9,7 +9,6 @@ type LabelKey = string | 'label';
 type ListItem = { label:string, id?:any };
 
 type OptionsAlert = {|
-    ...OptionsCheckbox,
     ...OptionsCommon
 |}
 
@@ -40,11 +39,13 @@ type ListItemJustId = { id:string };
 type ListItemFull = { label:string, id:any };
 type ListItemBare = {};
 
-type OptionsRadio = {|
+type OptionsRadioList = {|
+    maxNumberOfItems?: int,
     type: typeof ListType.listRadio,
     widgetColor?: ColorValue // radio color
 |}
-type OptionsCheckbox = {|
+type OptionsCheckboxList = {|
+    maxNumberOfItems?: int,
     type: typeof ListType.listCheckbox,
     neutralIsClear?: boolean,
     widgetColor?: ColorValue // checkbox color
@@ -62,38 +63,38 @@ type OptionsPicker = {|
 |} | {|
     // radio - no preselected
     ...OptionsCommon,
-    ...OptionsRadio,
+    ...OptionsRadioList,
     items: ListItemJustLabel[],
 |} | {|
     // radio - no preselected
     ...OptionsCommon,
-    ...OptionsRadio,
+    ...OptionsRadioList,
     items: ListItemBare[],
     labelKey: string
 |} | {|
     // radio - preselected - ListItemFull
     ...OptionsCommon,
-    ...OptionsRadio,
+    ...OptionsRadioList,
     items: ListItemFull[],
     selectedId: any
 |} | {|
     // radio - preselected - ListItemJustlabel
     ...OptionsCommon,
-    ...OptionsRadio,
+    ...OptionsRadioList,
     items: ListItemJustLabel[],
     idKey: string,
     selectedId: any
 |} | {|
     // radio - preselected - ListItemJustId
     ...OptionsCommon,
-    ...OptionsRadio,
+    ...OptionsRadioList,
     items: ListItemJustId[],
     labelKey: string,
     selectedId: any
 |} | {|
     // radio - preselected - ListItemBare
     ...OptionsCommon,
-    ...OptionsRadio,
+    ...OptionsRadioList,
     items: ListItemBare[],
     idKey: string,
     labelKey: string,
@@ -101,38 +102,38 @@ type OptionsPicker = {|
 |} | {|
     // checklist - no preselected - ListItemJustLabel
     ...OptionsCommon,
-    ...OptionsCheckbox,
+    ...OptionsCheckboxList,
     items: ListItemJustLabel[]
 |} | {|
     // checklist - no preselected - ListItemBare
     ...OptionsCommon,
-    ...OptionsCheckbox,
+    ...OptionsCheckboxList,
     items: ListItemBare[],
     labelKey: string
 |} | {|
     // checklist - preselected - ListItemFull
     ...OptionsCommon,
-    ...OptionsCheckbox,
+    ...OptionsCheckboxList,
     items: ListItemFull[],
     selectedIds: any[]
 |} | {|
     // checklist - preselected - ListItemJustlabel
     ...OptionsCommon,
-    ...OptionsCheckbox,
+    ...OptionsCheckboxList,
     items: ListItemJustLabel[],
     idKey: string,
     selectedIds: any
 |} | {|
     // checklist - preselected - ListItemJustId
     ...OptionsCommon,
-    ...OptionsCheckbox,
+    ...OptionsCheckboxList,
     items: ListItemJustId[],
     labelKey: string,
     selectedIds: any
 |} | {|
     // checklist - preselected - ListItemBare
     ...OptionsCommon,
-    ...OptionsCheckbox,
+    ...OptionsCheckboxList,
     items: ListItemBare[],
     idKey: string,
     labelKey: string,
