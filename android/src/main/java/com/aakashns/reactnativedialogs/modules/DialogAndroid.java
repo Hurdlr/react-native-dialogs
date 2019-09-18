@@ -435,26 +435,30 @@ public class DialogAndroid extends ReactContextBaseJavaModule {
             public void run() {
                 if (mDialog != null)
                     mDialog.dismiss();
-                mDialog = mBuilder.build();
+                try {
+                  mDialog = mBuilder.build();
 
-                if(numberOfItems > 0) {
-                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-                    lp.copyFrom(mDialog.getWindow().getAttributes());
-                    lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                  if(numberOfItems > 0) {
+                      WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                      lp.copyFrom(mDialog.getWindow().getAttributes());
+                      lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
 
-                    int dp = (int) (getReactApplicationContext().getResources().getDimension(R.dimen.md_listitem_height)
-                            / getReactApplicationContext().getResources().getDisplayMetrics().density);
-
-
-                    float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp * (numberOfItems +3), getReactApplicationContext().getResources().getDisplayMetrics());
+                      int dp = (int) (getReactApplicationContext().getResources().getDimension(R.dimen.md_listitem_height)
+                              / getReactApplicationContext().getResources().getDisplayMetrics().density);
 
 
-                    lp.height = (int) pixels;
-                    mDialog.getWindow().setAttributes(lp);
+                      float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp * (numberOfItems +3), getReactApplicationContext().getResources().getDisplayMetrics());
+
+
+                      lp.height = (int) pixels;
+                      mDialog.getWindow().setAttributes(lp);
+                  }
+
+
+                  mDialog.show();
+                } catch (Exception e)  {
+                  // do nothing
                 }
-
-
-                mDialog.show();
             }
         });
     }
